@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Data Display</title>
+</head>
+<body>
+    <h1>Uploaded Data</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Email</th>
+                <th>Name</th>
+                <th>Credit Score</th>
+                <th>Credit Lines</th>
+                <th>Masked Phone Number</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for data in page_obj %}
+            <tr>
+                <td>{{ data.email }}</td>
+                <td>{{ data.name }}</td>
+                <td>{{ data.credit_score }}</td>
+                <td>{{ data.credit_lines }}</td>
+                <td>{{ data.masked_phone_number }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div>
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">next</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+</body>
+</html>
